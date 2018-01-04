@@ -18,8 +18,7 @@ requirements:
     - eigen >=2.91.0
     - numpy 1.11.*
     - python 2.7.*
-    - protobuf
-    - libprotobuf
+    - libprotobuf 2.6.1
     - simplejson
 
 test:
