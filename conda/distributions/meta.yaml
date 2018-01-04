@@ -1,19 +1,23 @@
 package:
   name: distributions
-  version: "2.0.26"
+  version: "2.2.1"
+
+source:
+  path: ../../
 
 requirements:
   build:
     - cmake
-    - python
-    - numpy
-    - cython >=0.20.2
-    - libprotobuf
+    - cython 0.23.*
+    - eigen >=2.91.0
+    - libprotobuf 2.6.1
+    - numpy 1.11.*
+    - python 2.7.*
     - pyflakes
-    - eigen3
-  run: 
-    - python
-    - numpy
+  run:
+    - eigen >=2.91.0
+    - numpy 1.11.*
+    - python 2.7.*
     - protobuf
     - libprotobuf
     - simplejson

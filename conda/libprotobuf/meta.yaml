@@ -1,11 +1,11 @@
 package:
   name: libprotobuf
-  version: "2.5.0"
+  version: "2.6.1"
 
 source:
-  fn: libprotobuf-2.5.0.tar.gz
-  url: https://protobuf.googlecode.com/files/protobuf-2.5.0.tar.gz
-  sha1: 7f6ea7bc1382202fb1ce8c6933f1ef8fea0c0148
+  fn: libprotobuf-2.6.1.tar.gz
+  url: https://github.com/google/protobuf/releases/download/v2.6.1/protobuf-2.6.1.tar.gz
+  sha1: 375765455ad49e45e4e10364f91aaf2831d3e905
 
 test:
   files:

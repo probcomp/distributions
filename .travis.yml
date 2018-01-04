@@ -1,21 +1,23 @@
 language: python
+dist: trusty
+env:
+  global:
+    - PACKAGE_NAME=distributions
+    # get all the branches referencing this commit
+    - REAL_BRANCH=$(git ls-remote origin | sed -n "\|$TRAVIS_COMMIT\s\+refs/heads/|{s///p}")
+
 python:
   - 2.7
-virtualenv:
-  system_site_packages: true
-before_install:
-  - pip uninstall numpy -y || echo 'numpy not installed'
-  - sudo apt-get update -qq
-  - sudo apt-get install -qq cython python-numpy python-pil python-scipy
-  - sudo apt-get install libprotobuf-dev libeigen3-dev protobuf-compiler
-  - pip install cpplint pyflakes
-env:
-  - FLAVOR=_cc
-  - FLAVOR=_cc DISTRIBUTIONS_USE_PROTOBUF=1
-  - FLAVOR=_cc_examples
-  - FLAVOR=_cy
 install:
-  - make install$FLAVOR
-  - pip freeze
+  - wget https://repo.continuum.io/miniconda/Miniconda2-latest-Linux-x86_64.sh -O miniconda.sh
+  - bash miniconda.sh -b -p $HOME/miniconda
+  - export PATH="$HOME/miniconda/bin:$PATH"
+  - hash -r
+  - conda config --set always_yes yes --set changeps1 no
+  - conda update -q conda
+  - conda install conda-build
 script:
-  - make test$FLAVOR
+  - export CONDA_PACKAGE_VERSION="${TRAVIS_TAG:-$(date +%Y.%m.%d)}"
+  # remove leading v from tags if they exist
+  - CONDA_PACKAGE_VERSION="$(sed s/^v// <<<$CONDA_PACKAGE_VERSION)"
+  - conda build conda/distributions/
