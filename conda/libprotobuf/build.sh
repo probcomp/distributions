@@ -11,6 +11,6 @@ if [ "`uname`" = "Darwin" ]; then
     export CC=clang
     export CXX="clang++ -std=c++11 -stdlib=libc++"
 fi
-./configure --prefix=${PREFIX} --without-zlib
+./configure --prefix=${PREFIX} --with-zlib
 make -j
 make install
